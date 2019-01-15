@@ -8,15 +8,25 @@ export default class Todo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todoList: ['aaaaa', 'bbbbbb', 'ccccc'],
+            todoList: [],
         };
+
+        this.addTodo = this.addTodo.bind(this);
     }
 
-    render () {
+    addTodo(todoText) {
+        this.setState({
+            todoList: this.state.todoList.concat(todoText),
+        });
+    }
+
+    render() {
         return (
             <div className="todo">
                 <h1>React Todo App</h1>
-                <Form />
+                <Form
+                    addTodo={this.addTodo}
+                />
                 <List
                     todoList={this.state.todoList}
                 />
