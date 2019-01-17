@@ -27,9 +27,11 @@ export default class Todo extends React.Component {
                 <Form
                     addTodo={this.addTodo}
                 />
-                <List
-                    todoList={this.state.todoList}
-                />
+                <div className="list">
+                    <List
+                        todoList={this.state.todoList}
+                    />
+                </div>
             </div>
         );
     }
