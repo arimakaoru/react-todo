@@ -14,6 +14,7 @@ export default class Todo extends React.Component {
         this.addTodo = this.addTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.toggleIsChecked = this.toggleIsChecked.bind(this);
+        this.toggleIsDone = this.toggleIsDone.bind(this);
     }
 
     addTodo(todoText) {
@@ -21,6 +22,7 @@ export default class Todo extends React.Component {
             todoList: this.state.todoList.concat({
                 text: todoText,
                 isChecked: false,
+                isDone: false,
             }),
         });
     }
@@ -41,6 +43,14 @@ export default class Todo extends React.Component {
         });
     }
 
+    toggleIsDone(index) {
+        const newTodoList = this.state.todoList;
+        newTodoList[index].isDone = !this.state.todoList[index].isDone;
+        this.setState({
+            todoList: newTodoList,
+        });
+    }
+
     render() {
         return (
             <div className="todo">
@@ -52,6 +62,7 @@ export default class Todo extends React.Component {
                     todoList={this.state.todoList}
                     deleteTodo={this.deleteTodo}
                     toggleIsChecked={this.toggleIsChecked}
+                    toggleIsDone={this.toggleIsDone}
                 />
             </div>
         );

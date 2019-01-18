@@ -7,11 +7,16 @@ export default class List extends React.Component{
         const listItems = this.props.todoList.map((todoObj, index) => {
             return (
                 <li key={index}>
-                    <input
-                        type="checkbox"
-                        checked={todoObj.isChecked}
-                        onChange={(event) => this.props.toggleIsChecked(index, event)} />
-                    {todoObj.text}
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={todoObj.isChecked}
+                            onChange={(event) => this.props.toggleIsChecked(index, event)} />
+                        {todoObj.text}
+                    </label>
+                    <button type="button" onClick={(event) => this.props.toggleIsDone(index, event)}>
+                        {this.props.todoList[index].isDone ? '完了取り消し' : '完了する'}
+                    </button>
                 </li>
             );
         });
