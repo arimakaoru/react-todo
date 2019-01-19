@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.list__text--done {
+    color: gray;
+    text-decoration: line-through solid black;
+}
