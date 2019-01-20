@@ -34,7 +34,7 @@ export default class Form extends React.Component{
             <div className="form">
                 <form onSubmit={this.handleSubmit}>
                     <div className="form__items"><input type="text" value={this.state.todoText} onChange={this.todoTextChange} className="input-txt form__input-txt" />
-                    <button type="submit" className="btn form__btn">追加</button></div>
+                    <button type="submit" className="btn form__btn">Add</button></div>
                 </form>
             </div>
         );

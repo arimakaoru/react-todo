@@ -3,6 +3,11 @@ import React from 'react';
 
 export default class List extends React.Component{
     render() {
+        if(this.props.todoList.length === 0){
+            return (
+                <p>No List.</p>
+            );
+        }
         const listItems = this.props.todoList.map((todoObj, index) => {
             return (
                 <li key={index} className="list__ul__li">
@@ -18,7 +23,7 @@ export default class List extends React.Component{
                         type="button"
                         onClick={(event) => this.props.toggleIsDone(index, event)}
                         className="btn">
-                        {this.props.todoList[index].isDone ? '完了取り消し' : '完了'}
+                        {this.props.todoList[index].isDone ? 'Cancel' : 'Done'}
                     </button>
                 </li>
             );
@@ -32,7 +37,7 @@ export default class List extends React.Component{
                 <button
                     type="button"
                     onClick={this.props.deleteTodo}
-                    className="btn btn__delete">削除</button>
+                    className="btn btn__delete">Delete</button>
             </div>
         );
     }
