@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../css/Todo.css';
+import '../css/style.css';
 import Form from './Form.js';
 import List from './List.js';
 
@@ -54,10 +54,11 @@ export default class Todo extends React.Component {
     render() {
         return (
             <div className="todo">
-                <h1>React Todo App</h1>
+                <h1 className="todo__title">React ToDo App</h1>
                 <Form
                     addTodo={this.addTodo}
                 />
+                <h2>ToDo List</h2>
                 <List
                     todoList={this.state.todoList}
                     deleteTodo={this.deleteTodo}

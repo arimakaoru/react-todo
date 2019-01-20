@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import '../css/Form.css'
 
 export default class Form extends React.Component{
     constructor(props) {
@@ -34,8 +33,8 @@ export default class Form extends React.Component{
         return (
             <div className="form">
                 <form onSubmit={this.handleSubmit}>
-                    <p><input type="text" value={this.state.todoText} onChange={this.todoTextChange}/></p>
-                    <p><button type="submit">追加する</button></p>
+                    <div className="form__items"><input type="text" value={this.state.todoText} onChange={this.todoTextChange} className="input-txt form__input-txt" />
+                    <button type="submit" className="btn form__btn">追加</button></div>
                 </form>
             </div>
         );
