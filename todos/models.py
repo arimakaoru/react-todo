@@ -6,4 +6,4 @@ class Todo(models.Model):
     is_done = models.BooleanField('完了したか')
 
     def __str__(self):
-        return self.body[10]
+        return self.body[:10]
