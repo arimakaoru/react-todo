@@ -69,7 +69,7 @@ body {
 }
 .list__txt--done {
     color: gray;
-    text-decoration: line-through solid black;
+    text-decoration: line-through solid gray;
 }
 .list__checkbox {
     margin-right: 1em; 
