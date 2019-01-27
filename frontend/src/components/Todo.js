@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import uuidv4 from 'uuid/v4';
 
 import '../css/style.css';
 import Form from './Form.js';
@@ -40,13 +41,22 @@ export default class Todo extends React.Component {
     }
 
     addTodo(todoText) {
-        this.setState({
-            todoList: this.state.todoList.concat({
-                body: todoText,
-                isChecked: false,
-                isDone: false,
-            }),
+        axios.post('http://localhost:8000/api/todos/', {
+            body: todoText,
+            isDone: false,
+        }).then(res => {
+            this.getTodo();
+        }).catch(err => {
+            console.log(err);
         });
+        // this.setState({
+        //     todoList: this.state.todoList.concat({
+        //         uuid: uuidv4(),
+        //         body: todoText,
+        //         isChecked: false,
+        //         isDone: false,
+        //     }),
+        // });
     }
 
     deleteTodo() {
