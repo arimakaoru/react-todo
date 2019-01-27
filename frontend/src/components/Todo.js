@@ -24,7 +24,7 @@ export default class Todo extends React.Component {
     async getTodo() {
         let todoData;
         await axios
-            .get('http://localhost:8000/api/')
+            .get('http://localhost:8000/api/todos/')
             .then(res => {
                 todoData = res.data.map((obj) => {
                     obj.isChecked = false;
@@ -50,10 +50,20 @@ export default class Todo extends React.Component {
     }
 
     deleteTodo() {
+        const newState = this.state.todoList.filter((todoObj, index) => {
+            if(todoObj.isChecked){
+                axios.delete(`http://localhost:8000/api/todos/${todoObj.uuid}/`)
+                    .then(res => {
+                        console.log(res);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+            }
+
+            return !todoObj.isChecked;
+        });
         this.setState({
-            todoList: this.state.todoList.filter((todoObj, index) => {
-                return !todoObj.isChecked;
-            }),
+            todoList: newState,
         });
     }
 
