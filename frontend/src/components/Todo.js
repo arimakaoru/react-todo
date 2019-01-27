@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import '../css/style.css';
 import Form from './Form.js';
@@ -7,20 +8,41 @@ import List from './List.js';
 export default class Todo extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            todoList: [],
-        };
 
+        this.getTodo = this.getTodo.bind(this);
         this.addTodo = this.addTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.toggleIsChecked = this.toggleIsChecked.bind(this);
         this.toggleIsDone = this.toggleIsDone.bind(this);
+
+        this.state = {
+            todoList: [],
+        };
+        this.getTodo();
+    }
+
+    async getTodo() {
+        let todoData;
+        await axios
+            .get('http://localhost:8000/api/')
+            .then(res => {
+                todoData = res.data.map((obj) => {
+                    obj.isChecked = false;
+                    return obj;
+                });
+                this.setState({
+                    todoList: todoData,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     addTodo(todoText) {
         this.setState({
             todoList: this.state.todoList.concat({
-                text: todoText,
+                body: todoText,
                 isChecked: false,
                 isDone: false,
             }),

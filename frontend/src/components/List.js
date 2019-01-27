@@ -17,7 +17,7 @@ export default class List extends React.Component{
                             checked={todoObj.isChecked}
                             onChange={(event) => this.props.toggleIsChecked(index, event)}
                             className="input-checkbox list__checkbox" />
-                        {todoObj.text}
+                        {todoObj.body}
                     </label>
                     <button
                         type="button"
