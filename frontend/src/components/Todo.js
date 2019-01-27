@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import uuidv4 from 'uuid/v4';
 
 import '../css/style.css';
 import Form from './Form.js';
 import List from './List.js';
+
+const endPointUrl = 'http://localhost:8000/api';
 
 export default class Todo extends React.Component {
     constructor(props) {
@@ -22,10 +23,10 @@ export default class Todo extends React.Component {
         this.getTodo();
     }
 
-    async getTodo() {
+    getTodo() {
         let todoData;
-        await axios
-            .get('http://localhost:8000/api/todos/')
+        axios
+            .get(`${endPointUrl}/todos/`)
             .then(res => {
                 todoData = res.data.map((obj) => {
                     obj.isChecked = false;
@@ -41,7 +42,7 @@ export default class Todo extends React.Component {
     }
 
     addTodo(todoText) {
-        axios.post('http://localhost:8000/api/todos/', {
+        axios.post(`${endPointUrl}/todos/`, {
             body: todoText,
             isDone: false,
         }).then(res => {
@@ -49,20 +50,12 @@ export default class Todo extends React.Component {
         }).catch(err => {
             console.log(err);
         });
-        // this.setState({
-        //     todoList: this.state.todoList.concat({
-        //         uuid: uuidv4(),
-        //         body: todoText,
-        //         isChecked: false,
-        //         isDone: false,
-        //     }),
-        // });
     }
 
     deleteTodo() {
         const newState = this.state.todoList.filter((todoObj, index) => {
             if(todoObj.isChecked){
-                axios.delete(`http://localhost:8000/api/todos/${todoObj.uuid}/`)
+                axios.delete(`${endPointUrl}/todos/${todoObj.uuid}/`)
                     .then(res => {
                         console.log(res);
                     }).catch(err => {
@@ -86,10 +79,13 @@ export default class Todo extends React.Component {
     }
 
     toggleIsDone(index) {
-        const newTodoList = this.state.todoList;
-        newTodoList[index].isDone = !this.state.todoList[index].isDone;
-        this.setState({
-            todoList: newTodoList,
+        axios.put(`${endPointUrl}/todos/${this.state.todoList[index].uuid}/`, {
+            body: this.state.todoList[index].body,
+            isDone: !this.state.todoList[index].isDone,
+        }).then(res => {
+            this.getTodo();
+        }).catch(err => {
+            console.log(err);
         });
     }
 
